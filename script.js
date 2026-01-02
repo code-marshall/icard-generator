@@ -119,12 +119,15 @@ downloadBtn.addEventListener('click', async function() {
 
 function captureAndDownload(card) {
     html2canvas(card, {
-        scale: 2,
+        scale: 4,
         backgroundColor: '#ffffff',
         logging: false,
-        useCORS: true
+        useCORS: true,
+        allowTaint: true,
+        imageTimeout: 0,
+        removeContainer: true
     }).then(function(canvas) {
-        // Convert canvas to blob
+        // Convert canvas to blob with high quality PNG
         canvas.toBlob(function(blob) {
             // Create download link
             const url = URL.createObjectURL(blob);
@@ -135,7 +138,7 @@ function captureAndDownload(card) {
 
             // Clean up
             URL.revokeObjectURL(url);
-        });
+        }, 'image/png', 1.0);
     });
 }
 
