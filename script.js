@@ -27,7 +27,7 @@ companyLogoInput.addEventListener('change', function(e) {
         const reader = new FileReader();
         reader.onload = function(event) {
             previewLogo.src = event.target.result;
-            previewLogo.style.display = 'inline-block';
+            previewLogo.classList.add('show');
         };
         reader.readAsDataURL(file);
     }
@@ -44,7 +44,8 @@ employeePhotoInput.addEventListener('change', function(e) {
             uploadedPhotoURL = event.target.result;
             previewPhoto.style.backgroundImage = `url(${event.target.result})`;
             previewPhoto.style.backgroundSize = 'cover';
-            previewPhoto.style.backgroundPosition = 'center';
+            previewPhoto.style.backgroundPosition = 'center center';
+            previewPhoto.style.backgroundRepeat = 'no-repeat';
             previewPhoto.textContent = '';
         };
         reader.readAsDataURL(file);
