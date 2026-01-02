@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company ID Card Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Company ID Card Generator</h1>
+
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2>Enter Details</h2>
+                <form id="idCardForm">
+                    <div class="form-group">
+                        <label for="companyLogo">Company Logo:</label>
+                        <input type="file" id="companyLogo" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyName">Company Name:</label>
+                        <input type="text" id="companyName" placeholder="Enter company name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeePhoto">Employee Photo (Optional):</label>
+                        <input type="file" id="employeePhoto" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" id="fullName" placeholder="Enter full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID:</label>
+                        <input type="text" id="employeeId" placeholder="Enter employee ID" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="designation">Designation:</label>
+                        <input type="text" id="designation" placeholder="Enter designation" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bloodGroup">Blood Group:</label>
+                        <select id="bloodGroup" required>
+                            <option value="">Select blood group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="generateBtn" class="btn-generate">Generate Card</button>
+                    <button type="button" id="downloadBtn" class="btn-download">Download Card</button>
+                </form>
+            </div>
+
+            <!-- ID Card Preview Section -->
+            <div class="preview-section">
+                <h2>ID Card Preview</h2>
+                <div id="idCard" class="id-card">
+                    <div class="card-header">
+                        <img id="previewLogo" src="" alt="Company Logo" class="company-logo">
+                        <h3 id="previewCompanyName">COMPANY NAME</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="photo-container">
+                            <div id="previewPhoto" class="employee-photo">👤</div>
+                        </div>
+
+                        <div class="details">
+                            <div class="detail-row">
+                                <span class="label">Employee Name</span>
+                                <span id="previewName" class="value">John Doe</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Employee ID</span>
+                                <span id="previewId" class="value">EMP001</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Designation</span>
+                                <span id="previewDesignation" class="value">Software Engineer</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="label">Blood Group</span>
+                                <span id="previewBloodGroup" class="value">O+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <p class="card-footer-text">This card is property of the company. If found, please return.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
