@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company ID Card Generator</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -106,6 +108,22 @@
                     <div class="card-footer">
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Crop Modal -->
+    <div id="cropModal" class="crop-modal">
+        <div class="crop-modal-content">
+            <div class="crop-modal-header">
+                <h3>Crop Photo to Square</h3>
+            </div>
+            <div class="crop-container">
+                <img id="cropImage" src="" alt="Image to crop">
+            </div>
+            <div class="crop-modal-footer">
+                <button id="cancelCrop" class="btn-cancel">Cancel</button>
+                <button id="applyCrop" class="btn-apply">Apply Crop</button>
             </div>
         </div>
     </div>

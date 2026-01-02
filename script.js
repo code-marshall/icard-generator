@@ -33,20 +33,78 @@ companyLogoInput.addEventListener('change', function(e) {
     }
 });
 
-// Handle employee photo upload
+// Handle employee photo upload with cropping
 const employeePhotoImg = document.getElementById('employeePhotoImg');
 const photoPlaceholder = document.querySelector('.photo-placeholder');
+const cropModal = document.getElementById('cropModal');
+const cropImage = document.getElementById('cropImage');
+const cancelCropBtn = document.getElementById('cancelCrop');
+const applyCropBtn = document.getElementById('applyCrop');
+let cropper = null;
 
 employeePhotoInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
-            employeePhotoImg.src = event.target.result;
-            employeePhotoImg.style.display = 'block';
-            photoPlaceholder.style.display = 'none';
+            // Show crop modal
+            cropImage.src = event.target.result;
+            cropModal.classList.add('show');
+
+            // Initialize cropper
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            cropper = new Cropper(cropImage, {
+                aspectRatio: 1,
+                viewMode: 1,
+                autoCropArea: 1,
+                responsive: true,
+                background: false,
+                guides: true,
+                center: true,
+                highlight: true,
+                cropBoxMovable: true,
+                cropBoxResizable: true,
+                toggleDragModeOnDblclick: false,
+            });
         };
         reader.readAsDataURL(file);
+    }
+});
+
+// Cancel crop
+cancelCropBtn.addEventListener('click', function() {
+    cropModal.classList.remove('show');
+    if (cropper) {
+        cropper.destroy();
+        cropper = null;
+    }
+    employeePhotoInput.value = '';
+});
+
+// Apply crop
+applyCropBtn.addEventListener('click', function() {
+    if (cropper) {
+        const canvas = cropper.getCroppedCanvas({
+            width: 500,
+            height: 500,
+            imageSmoothingEnabled: true,
+            imageSmoothingQuality: 'high',
+        });
+
+        canvas.toBlob(function(blob) {
+            const url = URL.createObjectURL(blob);
+            employeePhotoImg.src = url;
+            employeePhotoImg.style.display = 'block';
+            photoPlaceholder.style.display = 'none';
+
+            // Close modal
+            cropModal.classList.remove('show');
+            cropper.destroy();
+            cropper = null;
+        }, 'image/png', 1.0);
     }
 });
 
