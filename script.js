@@ -15,7 +15,6 @@ const previewName = document.getElementById('previewName');
 const previewId = document.getElementById('previewId');
 const previewDesignation = document.getElementById('previewDesignation');
 const previewBloodGroup = document.getElementById('previewBloodGroup');
-const previewFooterCompany = document.getElementById('previewFooterCompany');
 
 // Get buttons
 const generateBtn = document.getElementById('generateBtn');
@@ -35,19 +34,17 @@ companyLogoInput.addEventListener('change', function(e) {
 });
 
 // Handle employee photo upload
-let uploadedPhotoURL = null;
+const employeePhotoImg = document.getElementById('employeePhotoImg');
+const photoPlaceholder = document.querySelector('.photo-placeholder');
 
 employeePhotoInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function(event) {
-            uploadedPhotoURL = event.target.result;
-            previewPhoto.style.backgroundImage = `url(${event.target.result})`;
-            previewPhoto.style.backgroundSize = 'cover';
-            previewPhoto.style.backgroundPosition = 'center center';
-            previewPhoto.style.backgroundRepeat = 'no-repeat';
-            previewPhoto.textContent = '';
+            employeePhotoImg.src = event.target.result;
+            employeePhotoImg.style.display = 'block';
+            photoPlaceholder.style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
@@ -125,7 +122,11 @@ function captureAndDownload(card) {
         useCORS: true,
         allowTaint: true,
         imageTimeout: 0,
-        removeContainer: true
+        removeContainer: true,
+        scrollY: -window.scrollY,
+        scrollX: -window.scrollX,
+        windowHeight: card.scrollHeight,
+        height: card.scrollHeight
     }).then(function(canvas) {
         // Convert canvas to blob with high quality PNG
         canvas.toBlob(function(blob) {
@@ -146,7 +147,6 @@ function captureAndDownload(card) {
 companyNameInput.addEventListener('input', function() {
     const companyName = this.value || 'Company Name';
     previewCompanyName.textContent = companyName.toUpperCase();
-    previewFooterCompany.textContent = companyName;
 });
 
 fullNameInput.addEventListener('input', function() {
