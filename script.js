@@ -15,6 +15,7 @@ const previewName = document.getElementById('previewName');
 const previewId = document.getElementById('previewId');
 const previewDesignation = document.getElementById('previewDesignation');
 const previewBloodGroup = document.getElementById('previewBloodGroup');
+const previewFooterCompany = document.getElementById('previewFooterCompany');
 
 // Get buttons
 const generateBtn = document.getElementById('generateBtn');
@@ -140,7 +141,9 @@ function captureAndDownload(card) {
 
 // Real-time preview updates (optional)
 companyNameInput.addEventListener('input', function() {
-    previewCompanyName.textContent = this.value.toUpperCase() || 'COMPANY NAME';
+    const companyName = this.value || 'Company Name';
+    previewCompanyName.textContent = companyName.toUpperCase();
+    previewFooterCompany.textContent = companyName;
 });
 
 fullNameInput.addEventListener('input', function() {
